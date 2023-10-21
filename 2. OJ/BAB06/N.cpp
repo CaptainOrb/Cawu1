@@ -2,7 +2,7 @@
 
 bool reached;
 
-void knight(int chessBoard[][10], int moveCount, int maxMove, int x, int y, int xTarget, int yTarget){
+void knight(int moveCount, int maxMove, int x, int y, int xTarget, int yTarget){
     if (reached) return; // if the target is reached
 
     // if it's out of bounds
@@ -16,14 +16,14 @@ void knight(int chessBoard[][10], int moveCount, int maxMove, int x, int y, int 
     } 
     if (moveCount == maxMove) return; // if the maxMove is passed
     // moves
-    knight(chessBoard, moveCount+1, maxMove, x+1, y+2, xTarget, yTarget);
-    knight(chessBoard, moveCount+1, maxMove, x+2, y+1, xTarget, yTarget);
-    knight(chessBoard, moveCount+1, maxMove, x+2, y-1, xTarget, yTarget);
-    knight(chessBoard, moveCount+1, maxMove, x+1, y-2, xTarget, yTarget);
-    knight(chessBoard, moveCount+1, maxMove, x-1, y-2, xTarget, yTarget);
-    knight(chessBoard, moveCount+1, maxMove, x-2, y-1, xTarget, yTarget);
-    knight(chessBoard, moveCount+1, maxMove, x-2, y+1, xTarget, yTarget);
-    knight(chessBoard, moveCount+1, maxMove, x-1, y+2, xTarget, yTarget);
+    knight(moveCount+1, maxMove, x+1, y+2, xTarget, yTarget);
+    knight(moveCount+1, maxMove, x+2, y+1, xTarget, yTarget);
+    knight(moveCount+1, maxMove, x+2, y-1, xTarget, yTarget);
+    knight(moveCount+1, maxMove, x+1, y-2, xTarget, yTarget);
+    knight(moveCount+1, maxMove, x-1, y-2, xTarget, yTarget);
+    knight(moveCount+1, maxMove, x-2, y-1, xTarget, yTarget);
+    knight(moveCount+1, maxMove, x-2, y+1, xTarget, yTarget);
+    knight(moveCount+1, maxMove, x-1, y+2, xTarget, yTarget);
 }
 
 int main(){
@@ -48,7 +48,7 @@ int main(){
         // printf("%d\n", yStart);
         // printf("%d ", xEnd);
         // printf("%d\n", yEnd);
-        knight(chessBoard, 0, maxMove, xStart, yStart, xEnd, yEnd);
+        knight(0, maxMove, xStart, yStart, xEnd, yEnd);
 
         printf("Case #%d: ", tc);
         if (reached) printf("YES\n");
