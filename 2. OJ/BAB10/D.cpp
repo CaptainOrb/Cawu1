@@ -1,44 +1,33 @@
 #include <stdio.h>
 
-int findSum(int arr[], int length, unsigned long long max)
-{
+int findSum(int arr[], int length, unsigned long long max){
     int maxLength = 0;
     int index = 0;
-    while (index < length)
-    {
+    while (index < length){
         unsigned long long tmpSum = 0;
         int retLength = 0;
-        for (int j = index; j < length; j++)
-        {
-            if (tmpSum + arr[j] <= max)
-            {
+        for (int j = index; j < length; j++){
+            if (tmpSum + arr[j] <= max){
                 tmpSum += arr[j];
                 retLength++;
             }
             else break;
         }
-        
         if (retLength > maxLength) maxLength = retLength;
         index++;
     }
-
     return maxLength;
 }
 
-int main()
-{
+int main(){
     int T;
     scanf("%d", &T);
-    for (int tc = 1; tc <= T; tc++)
-    {
+    for (int tc = 1; tc <= T; tc++){
         int N;
         unsigned long long M;
         scanf("%d %llu", &N, &M);
         int numbers[10000];
-        for (int i = 0; i < N; i++)
-        {
-            scanf("%d", &numbers[i]);
-        }
+        for (int i = 0; i < N; i++) scanf("%d", &numbers[i]);
 
         int maxLen = findSum(numbers, N, M);
         if (maxLen == 0) maxLen = -1;

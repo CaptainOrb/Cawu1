@@ -6,11 +6,10 @@ unsigned long long low;
 unsigned long long high;
 unsigned long long mid;
 unsigned long long sum;
-// long double sum;
 
 unsigned long long binarySumSearch(unsigned long long target) {
     low = 1;
-    high = 1500000;
+    high = 1500000; // top limit
 
     while (low < high) {
         mid = low + (high - low) / 2;
