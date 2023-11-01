@@ -3,7 +3,7 @@
     Wesley Aldrich
     PPTI 17
 
-    Bahan Belajar Kelompok Tutor Mistis: Quick Sort (Advance Revisi)
+    Bahan Belajar Kelompok Tutor Mistis: Quick Sort
 */
 
 #include <stdio.h>
@@ -47,15 +47,7 @@ void quickSort(int arr[], int size){
 void quickSort_recursive(int arr[], int start, int end) {
     if (start >= end) return;
 
-    int middle = start + (end-start)/2;
-    // int pivot = arr[end];
-    int pivot;
-    if ((arr[start] <= arr[middle] && arr[start] >= arr[end]) || (arr[start] >= arr[middle] && arr[start] <= arr[end]))
-        pivot = arr[start];
-    else if ((arr[middle] <= arr[start] && arr[middle] >= arr[end]) || (arr[middle] >= arr[start] && arr[middle] <= arr[end]))
-        pivot = arr[middle];
-    else
-        pivot = arr[end];
+    int pivot = arr[end];
 
     int left = start;
     int right = end;

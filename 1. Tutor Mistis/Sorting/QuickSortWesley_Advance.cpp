@@ -1,89 +1,76 @@
 /*
-    QUICKSORT ATTEMPT
-    Wesley Aldrich (2702363613)
+    SIMULASI SORTING
+    Wesley Aldrich
     PPTI 17
 
-    TESTING
+    Bahan Belajar Kelompok Tutor Mistis: Quick Sort (Advance)
 */
 
 #include <stdio.h>
 
+// extra functions
 void swap(int *x, int *y){
-    printf("Swapping %d with %d\n", *x, *y);
     int tmp = *x;
     *x = *y;
     *y = tmp;
 }
-
-int printArr(int arr[], int start, int end){
-    for (int i = start; i <= end; i++) printf("%d ", arr[i]);
+void printArray(int arr[], int size){
+    for (int i = 0; i < size; i++){
+        printf("%d ", arr[i]);
+    }
     printf("\n");
 }
 
-int midData(int arr[], int a, int b, int c){
-    if (arr[a] <= arr[b] && arr[b] <= arr[c] || arr[c] <= arr[b] && arr[b] <= arr[a]) return b;
-    else if (arr[b] <= arr[a] && arr[a] <= arr[c] || arr[c] <= arr[a] && arr[a] <= arr[b]) return a;
-    else if (arr[a] <= arr[c] && arr[c] <= arr[b] || arr[b] <= arr[c] && arr[c] <= arr[a]) return c;
-
-    return -1; // unexpected error code
-}
-
-void pushPivot(int arr[], int start, int end){
-    int mid = start + (end - start)/2;
-    int pivotPos = midData(arr, start, mid, end);
-    printf("Initial Pivot (value): %d\n", arr[pivotPos]);
-    printf("Initial Pivot (index): %d\n", pivotPos);
-    swap(&arr[pivotPos], &arr[end]); // put the selected pivot value to the end
-}
-
-void quickSort(int arr[], int start, int end){
-    if (start < end){
-        printf("Start Pivot (index): %d\n", end);
-        int pivot = arr[end];
-        int leftPointer = start, rightPointer = end - 1;
-        while (leftPointer < rightPointer){
-            while (arr[leftPointer] < pivot) leftPointer++;
-            while (arr[rightPointer] > pivot) rightPointer--;
-
-            if (leftPointer >= rightPointer) break;
-
-            printf("DETECTED INDEX (pointers): %d %d\n", leftPointer, rightPointer);
-            swap(&arr[leftPointer], &arr[rightPointer]);
-            printArr(arr, 0, 6);
-        }
-
-        printf("DETECTED INDEX (reset pivot): %d %d\n", end, leftPointer);
-        swap(&arr[end], &arr[leftPointer]);
-        printArr(arr, 0, 6);
-        printf("End Pivot (index): %d\n", leftPointer);
-        printf("\n");
-        
-        quickSort(arr, start, leftPointer-1);
-        quickSort(arr, leftPointer+1, end);
-    }
-}
-
-void advancedQuickSort(int arr[], int start, int end){
-    pushPivot(arr, start, end);
-    printArr(arr, 0, 6); printf("\n");
-    quickSort(arr, start, end);
-}
+// necessary functions
+void quickSort(int arr[], int size);
+void quickSort_recursive(int arr[], int start, int end);
 
 int main(){
-    int arr[] = {13, 1, 2, 15, 23, 23, 29}; // sample unsorted array
-    int end = sizeof(arr)/sizeof(arr[0]) - 1;
-    printf("%d\n", end);
+    // int nilaiAmbition[] = {98, 91, 92, 100, 63, 88, 100, 49};
+    int nilaiAmbition[] = {3, 3, 3, 3, 3, 2};
+    int size = sizeof(nilaiAmbition)/sizeof(nilaiAmbition[0]);
 
-    printf("Unsorted Array:\n");
-    printArr(arr, 0, end);
-    printf("\n");
-
-    // sort immediately
-    // quickSort(arr, 0, end);
-
-    // find the median of three before sorting
-    advancedQuickSort(arr, 0, end);
+    printf("Initial Array:\n");
+    printArray(nilaiAmbition, size);
 
     printf("Sorted Array:\n");
-    printArr(arr, 0, end);
+    quickSort(nilaiAmbition, size);
+    printArray(nilaiAmbition, size);
+}
+
+void quickSort(int arr[], int size){
+    int start = 0;
+    int end = size - 1;
+    quickSort_recursive(arr, start, end);
+}
+
+void quickSort_recursive(int arr[], int start, int end) {
+    if (start >= end) return;
+
+    int middle = start + (end-start)/2;
+    // int pivot = arr[end];
+    int pivot;
+    if ((arr[start] <= arr[middle] && arr[start] >= arr[end]) || (arr[start] >= arr[middle] && arr[start] <= arr[end]))
+        pivot = arr[start];
+    else if ((arr[middle] <= arr[start] && arr[middle] >= arr[end]) || (arr[middle] >= arr[start] && arr[middle] <= arr[end]))
+        pivot = arr[middle];
+    else
+        pivot = arr[end];
+
+    int left = start;
+    int right = end;
+
+    while (left <= right) {
+        while (arr[left] < pivot) left++;
+        while (arr[right] > pivot) right--;
+
+        if (left <= right) {
+            swap(&arr[left], &arr[right]);
+            left++;
+            right--;
+        }
+    }
+
+    quickSort_recursive(arr, start, right);
+    quickSort_recursive(arr, left, end);
 }

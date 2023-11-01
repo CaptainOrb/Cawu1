@@ -22,7 +22,8 @@ void mergeSort_recursive(int arr[], int left, int right);
 void merge(int arr[], int left, int mid, int right);
 
 int main(){
-    int nilaiAmbition[] = {98, 91, 92, 100, 63, 88, 100, 49};
+    // int nilaiAmbition[] = {98, 91, 92, 100, 63, 88, 100, 49};
+    int nilaiAmbition[] = {3, 3, 3, 3, 2};
     int size = sizeof(nilaiAmbition)/sizeof(nilaiAmbition[0]);
 
     printf("Initial Array:\n");
@@ -63,16 +64,28 @@ void merge(int arr[], int left, int mid, int right){
 
     // compare the temporary arrays
     int i = 0, j = 0, k = left;
-    while (k <= right){
-        if (tmpL[i] <= tmpR[j] || (i < leftLength && j >= rightLength)){
-            // this condition also happens when j is out of range
+    while (i < leftLength && j < rightLength) {
+        if (tmpL[i] <= tmpR[j]) {
             arr[k] = tmpL[i];
             i++;
-        }
-        else{
+        } else {
             arr[k] = tmpR[j];
             j++;
         }
+        k++;
+    }
+
+    // Copy any remaining elements from tmpL (if any)
+    while (i < leftLength) {
+        arr[k] = tmpL[i];
+        i++;
+        k++;
+    }
+
+    // Copy any remaining elements from tmpR (if any)
+    while (j < rightLength) {
+        arr[k] = tmpR[j];
+        j++;
         k++;
     }
 }
