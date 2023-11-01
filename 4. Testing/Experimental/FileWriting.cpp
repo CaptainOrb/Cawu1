@@ -7,7 +7,7 @@ FILE *fptr;
 void writeToFile()
 {
     // ganti alamat ini ke alamat file yang kalian mau
-    fptr = fopen("D:\\.BCA\\BCA Coding\\Testing\\WritingFile.txt", "w");
+    fptr = fopen("FileWriting.txt", "w");
     printf("Enter something: ");
     // ngescan huruf apapun termasuk enter, bakal stop kalau diinput tanda "#"
     scanf("%[^#]", savedFile);
@@ -18,7 +18,7 @@ void writeToFile()
 void readFromFile()
 {
     // ganti alamat ini ke alamat file yang kalian mau
-    fptr = fopen("D:\\.BCA\\BCA Coding\\Testing\\WritingFile.txt", "r");
+    fptr = fopen("FileWriting.txt", "r");
     fscanf(fptr, "%[^#]", savedFile);
     printf("My Saved File:\n");
     printf("%s", savedFile);
