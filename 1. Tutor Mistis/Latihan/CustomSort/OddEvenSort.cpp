@@ -13,6 +13,7 @@ void merge(int arr[], int start, int mid, int end){
         if (tmpL[L] <= tmpR[R]) arr[index++] = tmpL[L++];
         else arr[index++] = tmpR[R++];
     }
+
     while (L < leftLength) arr[index++] = tmpL[L++];
     while (R < rightLength) arr[index++] = tmpR[R++];
 }
