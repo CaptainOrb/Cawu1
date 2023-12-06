@@ -38,12 +38,6 @@ bool isAttacked(int row, int col){
     return false; // queen is not attacked
 }
 
-void reset(int N){
-    for (int i = 1; i <= N; i++)
-        for (int j = 1; j <= N; j++)
-            board[i][j] = 0;
-}
-
 void spawn(int row, int N){
     for (int col = 1; col <= N; col++){
         if (isAttacked(row, col)) continue; // skip if queen would be attacked
