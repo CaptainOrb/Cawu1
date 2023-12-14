@@ -27,7 +27,7 @@ void printRes(int N){
 }
 
 bool isAttacked(int row, int col){
-    for (int i = 1; i <= row; i++) // check rook move
+    for (int i = 1; i <= row-1; i++) // check rook move
         if (board[i][col] == 1) return true;
 
     for (int i = 1; i <= row-1; i++){ // check bishop move
@@ -62,5 +62,6 @@ int main(){
     else spawn(1, N);
 
     printf("]");
+    printf("\n%d", solution);
     return 0;
 }
